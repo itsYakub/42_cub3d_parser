@@ -3,7 +3,7 @@ ARFLAGS	= rcs
 CC		= cc
 CFLAGS	= -Wall -Wextra -Werror -std=c99
 LIBFT	= ./libft/libft.a
-SRC		= ./par-map0.c ./par-map1.c ./par-fgetc.c ./par-extract-data0.c ./par-extract-data1.c
+SRC		= ./par-map0.c ./par-map1.c ./par-fgetc.c ./par-extract-data0.c ./par-extract-data1.c ./par-extract-data2.c
 OBJ		= $(SRC:.c=.o)
 NAME	= libpar.a
 

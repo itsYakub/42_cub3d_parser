@@ -6,7 +6,7 @@
 /*   By: joleksia <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/21 09:01:51 by joleksia          #+#    #+#             */
-/*   Updated: 2025/03/21 11:01:02 by joleksia         ###   ########.fr       */
+/*   Updated: 2025/03/26 08:55:51 by joleksia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,19 +40,16 @@ int	par_extract(t_map *map, const char *s)
 
 int	par_process_line(t_map *map, char *line)
 {
-	if (!ft_strncmp(line, "NO", 2))
-		return (par_getpath(line + 2, &map->wall_no_file));
-	else if (!ft_strncmp(line, "SO", 2))
-		return (par_getpath(line + 2, &map->wall_so_file));
-	else if (!ft_strncmp(line, "WE", 2))
-		return (par_getpath(line + 2, &map->wall_we_file));
-	else if (!ft_strncmp(line, "EA", 2))
-		return (par_getpath(line + 2, &map->wall_ea_file));
-	else if (!ft_strncmp(line, "F", 1))
-		return (par_getcol(line + 1, map->color_floor));
-	else if (!ft_strncmp(line, "C", 1))
-		return (par_getcol(line + 1, map->color_ceiling));
+	if (par_misc_filled(map))
+		map->parse_mode = PARSE_MODE_CELL;
+	if (map->parse_mode == PARSE_MODE_MISC)
+		return (par_parse_misc(map, line));
+	else if (map->parse_mode == PARSE_MODE_CELL)
+		return (par_parse_cell(map, line));
 	else
-		printf("Something different!\n");
-	return (0);
+		return (0);
+	while (par_line_empty(line))
+		return (1);
+	map->parse_mode = PARSE_MODE_CELL;
+	return (1);
 }

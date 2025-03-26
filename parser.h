@@ -6,7 +6,7 @@
 /*   By: joleksia <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/21 07:22:12 by joleksia          #+#    #+#             */
-/*   Updated: 2025/03/21 10:27:42 by joleksia         ###   ########.fr       */
+/*   Updated: 2025/03/26 08:48:50 by joleksia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,14 +44,22 @@ typedef int				t_vec3i[3];
 typedef float			t_vec4[4];
 typedef int				t_vec4i[4];
 
+typedef enum e_parse_mode
+{
+	PARSE_MODE_MISC = 0,
+	PARSE_MODE_CELL
+}	t_parse_mode;
+
 typedef struct s_map
 {
-	char	*wall_no_file;
-	char	*wall_so_file;
-	char	*wall_we_file;
-	char	*wall_ea_file;
-	t_vec3i	color_floor;
-	t_vec3i	color_ceiling;
+	int				misc_fill[6];
+	char			*wall_no_file;
+	char			*wall_so_file;
+	char			*wall_we_file;
+	char			*wall_ea_file;
+	t_vec3i			color_floor;
+	t_vec3i			color_ceiling;
+	t_parse_mode	parse_mode;
 }	t_map;
 
 /*	SECTION:
@@ -67,10 +75,15 @@ int		par_map_ext(const char *filepath);
 char	par_fgetc(int fd);
 char	*par_sgetline(const char *s);
 
-/* ./par-extract-data0.c ./par-extract-data1.c */
+/* ./par-extract-data0.c ./par-extract-data1.c ./par-extract-data2.c */
 int		par_extract(t_map *map, const char *s);
 int		par_process_line(t_map *map, char *line);
 int		par_getpath(char *s, char **dst);
 int		par_getcol(char *s, t_vec3i dst);
+int		par_line_empty(char *s);
+int		par_parse_misc(t_map *map, char *s);
+int		par_parse_cell(t_map *map, char *s);
+void	par_check_current_fill(t_map *map, char *s);
+int		par_misc_filled(t_map *map);
 
 #endif /* PARSER_H */
