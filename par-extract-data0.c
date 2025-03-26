@@ -6,7 +6,7 @@
 /*   By: joleksia <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/21 09:01:51 by joleksia          #+#    #+#             */
-/*   Updated: 2025/03/26 08:55:51 by joleksia         ###   ########.fr       */
+/*   Updated: 2025/03/26 11:08:26 by joleksia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ int	par_extract(t_map *map, const char *s)
 	if (!current_line)
 		return (!par_map_unload(map));
 	s += ft_strlen(current_line) + 1;
-	while (*s)
+	while (*s || *current_line)
 	{
 		if (!par_process_line(map, current_line))
 		{
@@ -41,15 +41,16 @@ int	par_extract(t_map *map, const char *s)
 int	par_process_line(t_map *map, char *line)
 {
 	if (par_misc_filled(map))
+	{
 		map->parse_mode = PARSE_MODE_CELL;
+		if (par_line_empty(line))
+			return (1);
+	}
 	if (map->parse_mode == PARSE_MODE_MISC)
 		return (par_parse_misc(map, line));
 	else if (map->parse_mode == PARSE_MODE_CELL)
 		return (par_parse_cell(map, line));
 	else
 		return (0);
-	while (par_line_empty(line))
-		return (1);
-	map->parse_mode = PARSE_MODE_CELL;
 	return (1);
 }

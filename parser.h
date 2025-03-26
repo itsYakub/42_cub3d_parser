@@ -6,7 +6,7 @@
 /*   By: joleksia <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/21 07:22:12 by joleksia          #+#    #+#             */
-/*   Updated: 2025/03/26 08:48:50 by joleksia         ###   ########.fr       */
+/*   Updated: 2025/03/26 09:53:21 by joleksia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,8 @@ typedef enum e_parse_mode
 
 typedef struct s_map
 {
+	t_parse_mode	parse_mode;
+	/* misc. part */
 	int				misc_fill[6];
 	char			*wall_no_file;
 	char			*wall_so_file;
@@ -59,7 +61,9 @@ typedef struct s_map
 	char			*wall_ea_file;
 	t_vec3i			color_floor;
 	t_vec3i			color_ceiling;
-	t_parse_mode	parse_mode;
+	/* cell part */
+	char			**cell_data;
+	unsigned int	height;
 }	t_map;
 
 /*	SECTION:
@@ -85,5 +89,10 @@ int		par_parse_misc(t_map *map, char *s);
 int		par_parse_cell(t_map *map, char *s);
 void	par_check_current_fill(t_map *map, char *s);
 int		par_misc_filled(t_map *map);
+
+/* ./par-utils0.c */
+void	*par_realloc(void *ptr, size_t size);
+char	*par_readfile(int fd);
+int		par_isspace(int c);
 
 #endif /* PARSER_H */

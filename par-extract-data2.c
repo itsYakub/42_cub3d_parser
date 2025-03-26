@@ -6,7 +6,7 @@
 /*   By: joleksia <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/26 06:53:12 by joleksia          #+#    #+#             */
-/*   Updated: 2025/03/26 08:51:42 by joleksia         ###   ########.fr       */
+/*   Updated: 2025/03/26 11:00:35 by joleksia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,6 @@
 
 int	par_parse_misc(t_map *map, char *s)
 {
-	printf("MODE: %d (%s)\n", map->parse_mode, s);
 	par_check_current_fill(map, s);
 	if (!ft_strncmp(s, "NO", 2))
 		return (par_getpath(s + 2, &map->wall_no_file));
@@ -35,8 +34,13 @@ int	par_parse_misc(t_map *map, char *s)
 
 int	par_parse_cell(t_map *map, char *s)
 {
-	(void) s;
-	printf("MODE: %d\n", map->parse_mode);
+	if (!ft_strncmp(s, "NO", 2) || !ft_strncmp(s, "SO", 2)
+		|| !ft_strncmp(s, "WE", 2) || !ft_strncmp(s, "EA", 2)
+		|| !ft_strncmp(s, "F", 1) || !ft_strncmp(s, "C", 1)
+		|| par_line_empty(s))
+		return (0);
+	map->cell_data = par_realloc(map->cell_data, ++map->height * sizeof(char *));
+	map->cell_data[map->height - 1] = ft_strdup(s);
 	return (1);
 }
 
