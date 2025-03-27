@@ -6,7 +6,7 @@
 /*   By: joleksia <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/21 09:01:51 by joleksia          #+#    #+#             */
-/*   Updated: 2025/03/27 09:58:11 by joleksia         ###   ########.fr       */
+/*   Updated: 2025/03/27 11:49:48 by joleksia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,11 +40,11 @@ int	par_extract(t_dat *dat, const char *s)
 
 int	par_process_line(t_dat *dat, char *line)
 {
-	if (par_misc_filled(dat))
+	if (dat->parse_mode == PARSE_MODE_MISC && par_misc_filled(dat))
 	{
-		dat->parse_mode = PARSE_MODE_CELL;
 		if (par_line_empty(line))
 			return (1);
+		dat->parse_mode = PARSE_MODE_CELL;
 	}
 	if (dat->parse_mode == PARSE_MODE_MISC)
 		return (par_parse_misc(dat, line));

@@ -6,7 +6,7 @@
 /*   By: joleksia <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/21 07:46:08 by joleksia          #+#    #+#             */
-/*   Updated: 2025/03/27 11:45:03 by joleksia         ###   ########.fr       */
+/*   Updated: 2025/03/27 11:51:35 by joleksia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,15 +16,16 @@ int	main(void)
 {
 	t_map	*map;
 	char	*filepaths[] = {
-		"example0.cub",
-		"example-invalid0.cub",
-		"example-invalid1.cub",
-		"example1.cub",
-		"example.c",
-		"test.c",
-		"example-invalid2.cub",
-		"example-invalid3.cub",
-		"example-invalid4.cub",
+		"./maps/example0.cub",
+		"./maps/example-invalid0.cub",
+		"./maps/example-invalid1.cub",
+		"./maps/example1.cub",
+		"./maps/example.c",
+		"./maps/test.c",
+		"./maps/example-invalid2.cub",
+		"./maps/example-invalid3.cub",
+		"./maps/example-invalid4.cub",
+		"./maps/example-invalid5.cub",
 		0
 	};
 
