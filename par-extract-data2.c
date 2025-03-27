@@ -6,62 +6,64 @@
 /*   By: joleksia <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/26 06:53:12 by joleksia          #+#    #+#             */
-/*   Updated: 2025/03/26 11:00:35 by joleksia         ###   ########.fr       */
+/*   Updated: 2025/03/27 09:21:05 by joleksia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parser.h"
 
-int	par_parse_misc(t_map *map, char *s)
+int	par_parse_misc(t_dat *dat, char *s)
 {
-	par_check_current_fill(map, s);
+	par_check_current_fill(dat, s);
 	if (!ft_strncmp(s, "NO", 2))
-		return (par_getpath(s + 2, &map->wall_no_file));
+		return (par_getpath(s + 2, &dat->wall_no_file));
 	else if (!ft_strncmp(s, "SO", 2))
-		return (par_getpath(s + 2, &map->wall_so_file));
+		return (par_getpath(s + 2, &dat->wall_so_file));
 	else if (!ft_strncmp(s, "WE", 2))
-		return (par_getpath(s + 2, &map->wall_we_file));
+		return (par_getpath(s + 2, &dat->wall_we_file));
 	else if (!ft_strncmp(s, "EA", 2))
-		return (par_getpath(s + 2, &map->wall_ea_file));
+		return (par_getpath(s + 2, &dat->wall_ea_file));
 	else if (!ft_strncmp(s, "F", 1))
-		return (par_getcol(s + 1, map->color_floor));
+		return (par_getcol(s + 1, dat->color_floor));
 	else if (!ft_strncmp(s, "C", 1))
-		return (par_getcol(s + 1, map->color_ceiling));
+		return (par_getcol(s + 1, dat->color_ceiling));
 	else if (par_line_empty(s))
 		return (1);
 	return (0);
 }
 
-int	par_parse_cell(t_map *map, char *s)
+int	par_parse_cell(t_dat *dat, char *s)
 {
 	if (!ft_strncmp(s, "NO", 2) || !ft_strncmp(s, "SO", 2)
 		|| !ft_strncmp(s, "WE", 2) || !ft_strncmp(s, "EA", 2)
-		|| !ft_strncmp(s, "F", 1) || !ft_strncmp(s, "C", 1)
-		|| par_line_empty(s))
+		|| !ft_strncmp(s, "F", 1) || !ft_strncmp(s, "C", 1))
 		return (0);
-	map->cell_data = par_realloc(map->cell_data, ++map->height * sizeof(char *));
-	map->cell_data[map->height - 1] = ft_strdup(s);
+	else if (par_line_empty(s))
+		return (dat->parse_mode = PARSE_MODE_FIN);
+	dat->cell_data
+		= par_realloc(dat->cell_data, ++dat->height * sizeof(char *));
+	dat->cell_data[dat->height - 1] = ft_strdup(s);
 	return (1);
 }
 
-void	par_check_current_fill(t_map *map, char *s)
+void	par_check_current_fill(t_dat *dat, char *s)
 {
-	map->misc_fill[0] = map->misc_fill[0] || !ft_strncmp(s, "NO", 2);
-	map->misc_fill[1] = map->misc_fill[1] || !ft_strncmp(s, "SO", 2);
-	map->misc_fill[2] = map->misc_fill[2] || !ft_strncmp(s, "WE", 2);
-	map->misc_fill[3] = map->misc_fill[3] || !ft_strncmp(s, "EA", 2);
-	map->misc_fill[4] = map->misc_fill[4] || !ft_strncmp(s, "F", 1);
-	map->misc_fill[5] = map->misc_fill[5] || !ft_strncmp(s, "C", 1);
+	dat->misc_fill[0] = dat->misc_fill[0] || !ft_strncmp(s, "NO", 2);
+	dat->misc_fill[1] = dat->misc_fill[1] || !ft_strncmp(s, "SO", 2);
+	dat->misc_fill[2] = dat->misc_fill[2] || !ft_strncmp(s, "WE", 2);
+	dat->misc_fill[3] = dat->misc_fill[3] || !ft_strncmp(s, "EA", 2);
+	dat->misc_fill[4] = dat->misc_fill[4] || !ft_strncmp(s, "F", 1);
+	dat->misc_fill[5] = dat->misc_fill[5] || !ft_strncmp(s, "C", 1);
 }
 
-int	par_misc_filled(t_map *map)
+int	par_misc_filled(t_dat *dat)
 {
 	return (
-		map->misc_fill[0]
-		&& map->misc_fill[1]
-		&& map->misc_fill[2]
-		&& map->misc_fill[3]
-		&& map->misc_fill[4]
-		&& map->misc_fill[5]
+		dat->misc_fill[0]
+		&& dat->misc_fill[1]
+		&& dat->misc_fill[2]
+		&& dat->misc_fill[3]
+		&& dat->misc_fill[4]
+		&& dat->misc_fill[5]
 	);
 }

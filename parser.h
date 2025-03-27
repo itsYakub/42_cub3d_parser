@@ -6,7 +6,7 @@
 /*   By: joleksia <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/21 07:22:12 by joleksia          #+#    #+#             */
-/*   Updated: 2025/03/26 09:53:21 by joleksia         ###   ########.fr       */
+/*   Updated: 2025/03/27 11:07:00 by joleksia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,10 +47,19 @@ typedef int				t_vec4i[4];
 typedef enum e_parse_mode
 {
 	PARSE_MODE_MISC = 0,
-	PARSE_MODE_CELL
+	PARSE_MODE_CELL,
+	PARSE_MODE_FIN
 }	t_parse_mode;
 
-typedef struct s_map
+typedef enum e_face_dir
+{
+	DIR_NORTH = 0,
+	DIR_SOUTH,
+	DIR_WEST,
+	DIR_EAST
+}	t_face_dir;
+
+typedef struct s_dat
 {
 	t_parse_mode	parse_mode;
 	/* misc. part */
@@ -64,35 +73,57 @@ typedef struct s_map
 	/* cell part */
 	char			**cell_data;
 	unsigned int	height;
+}	t_dat;
+
+typedef struct s_map
+{
+	char		**cell;
+	t_face_dir	dir;
+	t_vec2i		map_spawn;
+	t_vec2i		map_size;
 }	t_map;
 
 /*	SECTION:
  *		Function declarations
  * */
 
-/* ./par-map0.c ./par-map1.c */
-int		par_map_init(t_map *map, const char *filepath);
-int		par_map_unload(t_map *map);
-int		par_map_ext(const char *filepath);
+/* ./par-dat0.c ./par-dat1.c */
+int		par_dat_init(t_dat *dat, const char *filepath);
+int		par_dat_unload(t_dat *dat);
+int		par_dat_ext(const char *filepath);
+int		par_dat_inv_char(t_dat *dat);
+int		par_dat_spawn_present(t_dat *dat);
 
 /* ./par-fgetc.c */
 char	par_fgetc(int fd);
 char	*par_sgetline(const char *s);
 
 /* ./par-extract-data0.c ./par-extract-data1.c ./par-extract-data2.c */
-int		par_extract(t_map *map, const char *s);
-int		par_process_line(t_map *map, char *line);
+int		par_extract(t_dat *dat, const char *s);
+int		par_process_line(t_dat *dat, char *line);
 int		par_getpath(char *s, char **dst);
 int		par_getcol(char *s, t_vec3i dst);
 int		par_line_empty(char *s);
-int		par_parse_misc(t_map *map, char *s);
-int		par_parse_cell(t_map *map, char *s);
-void	par_check_current_fill(t_map *map, char *s);
-int		par_misc_filled(t_map *map);
+int		par_parse_misc(t_dat *dat, char *s);
+int		par_parse_cell(t_dat *dat, char *s);
+void	par_check_current_fill(t_dat *dat, char *s);
+int		par_misc_filled(t_dat *dat);
+
+/* ./par-map0.c */
+t_map	*par_map_init(const char *file);
+int		par_map_unload(t_map *map);
+
+/* ./par-dat-bounds0.c */
+int		par_left_bound(t_dat *dat);
+int		par_right_bound(t_dat *dat);
+int		par_top_bound(t_dat *dat);
+int		par_down_bound(t_dat *dat);
 
 /* ./par-utils0.c */
 void	*par_realloc(void *ptr, size_t size);
-char	*par_readfile(int fd);
+char	*par_readfile(int fd, size_t flen);
 int		par_isspace(int c);
+int		par_max(int a, int b);
+size_t	par_flen(const char *fpath);
 
 #endif /* PARSER_H */

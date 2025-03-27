@@ -6,7 +6,7 @@
 /*   By: joleksia <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/26 09:46:32 by joleksia          #+#    #+#             */
-/*   Updated: 2025/03/26 10:59:39 by joleksia         ###   ########.fr       */
+/*   Updated: 2025/03/27 10:52:03 by joleksia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,29 +26,44 @@ void	*par_realloc(void *ptr, size_t size)
 	return (newptr);
 }
 
-char	*par_readfile(int fd)
+char	*par_readfile(int fd, size_t flen)
 {
-	char	*fc0;
-	int		i;
-	char	c;
+	char	*fc;
 
-	fc0 = malloc(0);
-	if (!fc0)
+	fc = (char *) malloc(flen + 1);
+	if (!fc)
 		return (0);
-	c = par_fgetc(fd);
-	i = 0;
-	while (c)
+	if (read(fd, fc, flen) != (ssize_t) flen)
 	{
-		fc0 = par_realloc(fc0, ++i);
-		if (!fc0)
-			return (0);
-		fc0[i - 1] = c;
-		c = par_fgetc(fd);
+		free(fc);
+		return (0);
 	}
-	return (fc0);
+	fc[flen] = 0;
+	return (fc);
 }
 
 int	par_isspace(int c)
 {
 	return ((c >= 9 && c <= 13) || c == 32);
+}
+
+int	par_max(int a, int b)
+{
+	if (a > b)
+		return (a);
+	return (b);
+}
+
+size_t	par_flen(const char *fpath)
+{
+	size_t	siz;
+	char	c;
+	int		fd;
+
+	fd = open(fpath, O_RDONLY);
+	siz = 0;
+	while (read(fd, &c, 1))
+		siz++;
+	close(fd);
+	return (siz);
 }
