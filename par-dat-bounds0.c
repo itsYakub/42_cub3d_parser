@@ -6,7 +6,7 @@
 /*   By: joleksia <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/27 08:05:10 by joleksia          #+#    #+#             */
-/*   Updated: 2025/03/27 11:45:27 by joleksia         ###   ########.fr       */
+/*   Updated: 2025/03/28 08:16:58 by joleksia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,7 @@ int	par_top_bound(t_dat *dat)
 	int	y;
 
 	x = -1;
-	while (dat->cell_data[0][++x])
+	while (dat->cell_data[0][++x] != 0)
 	{
 		y = -1;
 		while (++y < (int) dat->height)
@@ -84,7 +84,7 @@ int	par_down_bound(t_dat *dat)
 	int	y;
 
 	x = -1;
-	while (dat->cell_data[0][++x])
+	while (dat->cell_data[dat->height - 1][++x] != 0)
 	{
 		y = (int) dat->height;
 		while (y-- > 0)

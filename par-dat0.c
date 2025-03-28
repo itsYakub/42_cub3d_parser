@@ -6,7 +6,7 @@
 /*   By: joleksia <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/21 07:34:01 by joleksia          #+#    #+#             */
-/*   Updated: 2025/03/27 11:08:04 by joleksia         ###   ########.fr       */
+/*   Updated: 2025/03/28 07:59:29 by joleksia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,7 @@ static int	__par_extract_dat(t_dat *dat, const char *filepath)
 		close(fd);
 		return (!printf("error: invalid extension\n"));
 	}
-	fc = par_readfile(fd, par_flen(filepath));
+	fc = par_readfile(fd);
 	close (fd);
 	if (!fc)
 		return (!printf("error: readfile error\n"));
@@ -84,6 +84,8 @@ static int	__par_process_dat(t_dat *dat)
 		|| !par_right_bound(dat)
 		|| !par_top_bound(dat)
 		|| !par_down_bound(dat))
+		return (0);
+	if (!par_dat_check_spaces(dat))
 		return (0);
 	if (par_dat_spawn_present(dat) != 1)
 		return (0);

@@ -6,7 +6,7 @@
 /*   By: joleksia <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/21 07:48:04 by joleksia          #+#    #+#             */
-/*   Updated: 2025/03/27 11:43:00 by joleksia         ###   ########.fr       */
+/*   Updated: 2025/03/28 07:01:49 by joleksia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,4 +63,31 @@ int	par_dat_spawn_present(t_dat *dat)
 	else if (scnt != 1)
 		printf("error: more than one spawn points\n");
 	return (scnt);
+}
+
+int	par_dat_check_spaces(t_dat *dat)
+{
+	t_vec2i	i;
+
+	i[1] = -1;
+	while (++i[1] < (int) dat->height)
+	{
+		i[0] = -1;
+		while (dat->cell_data[i[1]][++i[0]])
+		{
+			if (dat->cell_data[i[1]][i[0]] == 32)
+			{
+				if ((i[0] > 0
+						&& ft_strchr("0NEWS", dat->cell_data[i[1]][i[0] - 1]))
+					|| (i[0] + 1 != 0
+						&& ft_strchr("0NEWS", dat->cell_data[i[1]][i[0] + 1]))
+					|| (i[1] > 0
+						&& ft_strchr("0NEWS", dat->cell_data[i[1] - 1][i[0]]))
+					|| (i[1] < (int) dat->height - 1
+						&& ft_strchr("0NEWS", dat->cell_data[i[1] + 1][i[0]])))
+					return (!printf("error: hole in the map\n"));
+			}
+		}
+	}
+	return (1);
 }

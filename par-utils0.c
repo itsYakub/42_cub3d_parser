@@ -6,7 +6,7 @@
 /*   By: joleksia <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/26 09:46:32 by joleksia          #+#    #+#             */
-/*   Updated: 2025/03/27 10:52:03 by joleksia         ###   ########.fr       */
+/*   Updated: 2025/03/28 07:50:55 by joleksia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,19 +26,27 @@ void	*par_realloc(void *ptr, size_t size)
 	return (newptr);
 }
 
-char	*par_readfile(int fd, size_t flen)
+char	*par_readfile(int fd)
 {
 	char	*fc;
+	char	*tmp;
+	char	c[2];
+	size_t	len;
 
-	fc = (char *) malloc(flen + 1);
-	if (!fc)
-		return (0);
-	if (read(fd, fc, flen) != (ssize_t) flen)
+	tmp = 0;
+	fc = ft_strdup("");
+	ft_memset(c, 0, 2);
+	c[1] = 0;
+	len = 0;
+	while (read(fd, c, 1))
 	{
+		tmp = ft_strjoin(fc, c);
 		free(fc);
-		return (0);
+		fc = ft_strdup(tmp);
+		free(tmp);
+		len++;
 	}
-	fc[flen] = 0;
+	fc[len] = 0;
 	return (fc);
 }
 
@@ -52,18 +60,4 @@ int	par_max(int a, int b)
 	if (a > b)
 		return (a);
 	return (b);
-}
-
-size_t	par_flen(const char *fpath)
-{
-	size_t	siz;
-	char	c;
-	int		fd;
-
-	fd = open(fpath, O_RDONLY);
-	siz = 0;
-	while (read(fd, &c, 1))
-		siz++;
-	close(fd);
-	return (siz);
 }

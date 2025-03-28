@@ -6,7 +6,7 @@
 /*   By: joleksia <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/21 07:46:08 by joleksia          #+#    #+#             */
-/*   Updated: 2025/03/27 11:51:35 by joleksia         ###   ########.fr       */
+/*   Updated: 2025/03/28 08:24:08 by joleksia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,15 +17,16 @@ int	main(void)
 	t_map	*map;
 	char	*filepaths[] = {
 		"./maps/example0.cub",
-		"./maps/example-invalid0.cub",
-		"./maps/example-invalid1.cub",
 		"./maps/example1.cub",
-		"./maps/example.c",
-		"./maps/test.c",
-		"./maps/example-invalid2.cub",
-		"./maps/example-invalid3.cub",
-		"./maps/example-invalid4.cub",
-		"./maps/example-invalid5.cub",
+		"./maps/example-inv-misc-after-cell.cub",
+		"./maps/example-inv-hole-in-map.cub",
+		"./maps/example-inv-characters.cub",
+		"./maps/example-inv-multiple-spawn.cub",
+		"./maps/example-inv-no-spawn.cub",
+		"./maps/example-inv-hole-in-middle.cub",
+		"./maps/example-inv-empty.cub",
+		"./maps/example-inv-extension.c",
+		"./test.c",
 		0
 	};
 

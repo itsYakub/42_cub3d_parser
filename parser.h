@@ -6,7 +6,7 @@
 /*   By: joleksia <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/21 07:22:12 by joleksia          #+#    #+#             */
-/*   Updated: 2025/03/27 11:07:00 by joleksia         ###   ########.fr       */
+/*   Updated: 2025/03/28 07:48:35 by joleksia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,10 +53,10 @@ typedef enum e_parse_mode
 
 typedef enum e_face_dir
 {
-	DIR_NORTH = 0,
-	DIR_SOUTH,
-	DIR_WEST,
-	DIR_EAST
+	DIR_NORTH = 'N',
+	DIR_SOUTH = 'S',
+	DIR_WEST = 'W',
+	DIR_EAST = 'E'
 }	t_face_dir;
 
 typedef struct s_dat
@@ -93,6 +93,7 @@ int		par_dat_unload(t_dat *dat);
 int		par_dat_ext(const char *filepath);
 int		par_dat_inv_char(t_dat *dat);
 int		par_dat_spawn_present(t_dat *dat);
+int		par_dat_check_spaces(t_dat *dat);
 
 /* ./par-fgetc.c */
 char	par_fgetc(int fd);
@@ -121,9 +122,8 @@ int		par_down_bound(t_dat *dat);
 
 /* ./par-utils0.c */
 void	*par_realloc(void *ptr, size_t size);
-char	*par_readfile(int fd, size_t flen);
+char	*par_readfile(int fd);
 int		par_isspace(int c);
 int		par_max(int a, int b);
-size_t	par_flen(const char *fpath);
 
 #endif /* PARSER_H */

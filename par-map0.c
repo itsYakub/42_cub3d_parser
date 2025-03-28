@@ -6,7 +6,7 @@
 /*   By: joleksia <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/27 07:09:39 by joleksia          #+#    #+#             */
-/*   Updated: 2025/03/27 10:06:43 by joleksia         ###   ########.fr       */
+/*   Updated: 2025/03/28 07:49:41 by joleksia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,7 @@ t_map	*par_map_init(const char *file)
 	}
 	__par_map_siz(dat, map->map_size);
 	__par_map_playerspawn(dat, map->map_spawn);
+	map->dir = dat.cell_data[map->map_spawn[1]][map->map_spawn[0]];
 	par_dat_unload(&dat);
 	return (map);
 }

@@ -6,7 +6,7 @@
 /*   By: joleksia <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/21 09:01:51 by joleksia          #+#    #+#             */
-/*   Updated: 2025/03/27 11:49:48 by joleksia         ###   ########.fr       */
+/*   Updated: 2025/03/28 08:02:59 by joleksia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,8 @@ int	par_extract(t_dat *dat, const char *s)
 		current_line = par_sgetline(s);
 		if (!current_line)
 			return (!par_dat_unload(dat));
+		if (!*s)
+			break;
 		s += ft_strlen(current_line) + 1;
 	}
 	free(current_line);
