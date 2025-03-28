@@ -7,7 +7,7 @@ SRC		= ./par-dat0.c ./par-dat1.c ./par-fgetc.c ./par-extract-data0.c ./par-extra
 OBJ		= $(SRC:.c=.o)
 NAME	= libpar.a
 
-all: $(NAME)
+all: gitmodules $(NAME)
 
 $(NAME) : $(OBJ)
 	$(AR) $(ARFLAGS) $@ $^
@@ -16,7 +16,6 @@ $(OBJ) : %.o : %.c
 	$(CC) $(CFLAGS) -c $< -o $@
 
 $(LIBFT) :
-	git submodule update --init
 	make -C ./libft
 
 .PHONY: re clean fclean
@@ -42,3 +41,8 @@ debug: all
 
 test: $(NAME) $(LIBFT)
 	$(CC) $(CFLAGS) -ggdb -o $@.out ./test.c $^
+
+.PHONY: git-submodule
+
+gitmodules: .gitmodules
+	git submodule update --init
