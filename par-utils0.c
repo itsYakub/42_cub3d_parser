@@ -6,7 +6,7 @@
 /*   By: joleksia <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/26 09:46:32 by joleksia          #+#    #+#             */
-/*   Updated: 2025/03/28 07:50:55 by joleksia         ###   ########.fr       */
+/*   Updated: 2025/03/28 09:07:59 by joleksia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,11 @@ char	*par_readfile(int fd)
 		fc = ft_strdup(tmp);
 		free(tmp);
 		len++;
+	}
+	if (!len)
+	{
+		free(fc);
+		return (0);
 	}
 	fc[len] = 0;
 	return (fc);

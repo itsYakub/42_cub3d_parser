@@ -6,7 +6,7 @@
 /*   By: joleksia <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/21 07:34:01 by joleksia          #+#    #+#             */
-/*   Updated: 2025/03/28 07:59:29 by joleksia         ###   ########.fr       */
+/*   Updated: 2025/03/28 08:57:29 by joleksia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,6 +67,8 @@ static int	__par_extract_dat(t_dat *dat, const char *filepath)
 	close (fd);
 	if (!fc)
 		return (!printf("error: readfile error\n"));
+	else if (!*fc)
+		return (!printf("error: empty file\n"));
 	if (!par_extract(dat, fc))
 	{
 		free(fc);
