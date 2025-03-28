@@ -16,6 +16,7 @@ $(OBJ) : %.o : %.c
 	$(CC) $(CFLAGS) -c $< -o $@
 
 $(LIBFT) :
+	git submodule update --init
 	make -C ./libft
 
 .PHONY: re clean fclean
