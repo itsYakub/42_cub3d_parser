@@ -6,7 +6,7 @@
 /*   By: joleksia <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/27 07:09:39 by joleksia          #+#    #+#             */
-/*   Updated: 2025/03/28 07:49:41 by joleksia         ###   ########.fr       */
+/*   Updated: 2025/03/30 06:39:48 by joleksia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,12 @@ t_map	*par_map_init(const char *file)
 	__par_map_siz(dat, map->map_size);
 	__par_map_playerspawn(dat, map->map_spawn);
 	map->dir = dat.cell_data[map->map_spawn[1]][map->map_spawn[0]];
+	ft_memcpy(map->map_col_c, dat.color_ceiling, sizeof(t_vec4i));
+	ft_memcpy(map->map_col_f, dat.color_floor, sizeof(t_vec4i));
+	map->map_txt_no = ft_strdup(dat.wall_no_file);
+	map->map_txt_so = ft_strdup(dat.wall_so_file);
+	map->map_txt_we = ft_strdup(dat.wall_we_file);
+	map->map_txt_ea = ft_strdup(dat.wall_ea_file);
 	par_dat_unload(&dat);
 	return (map);
 }
@@ -39,6 +45,10 @@ int	par_map_unload(t_map *map)
 {
 	if (!map)
 		return (0);
+	free(map->map_txt_no);
+	free(map->map_txt_so);
+	free(map->map_txt_we);
+	free(map->map_txt_ea);
 	if (map->cell)
 	{
 		while (map->map_size[1]--)

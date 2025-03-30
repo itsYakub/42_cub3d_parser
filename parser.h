@@ -6,7 +6,7 @@
 /*   By: joleksia <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/21 07:22:12 by joleksia          #+#    #+#             */
-/*   Updated: 2025/03/28 07:48:35 by joleksia         ###   ########.fr       */
+/*   Updated: 2025/03/30 06:38:08 by joleksia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,6 +81,12 @@ typedef struct s_map
 	t_face_dir	dir;
 	t_vec2i		map_spawn;
 	t_vec2i		map_size;
+	t_vec4i		map_col_f;
+	t_vec4i		map_col_c;
+	char		*map_txt_no;
+	char		*map_txt_so;
+	char		*map_txt_we;
+	char		*map_txt_ea;
 }	t_map;
 
 /*	SECTION:
