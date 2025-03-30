@@ -6,7 +6,7 @@
 /*   By: joleksia <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/21 07:22:12 by joleksia          #+#    #+#             */
-/*   Updated: 2025/03/30 08:15:52 by joleksia         ###   ########.fr       */
+/*   Updated: 2025/03/30 13:59:39 by joleksia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,6 +100,8 @@ int		par_dat_ext(const char *filepath);
 int		par_dat_inv_char(t_dat *dat);
 int		par_dat_spawn_present(t_dat *dat);
 int		par_dat_check_spaces(t_dat *dat);
+int		par_get_neigh(char **t, t_vec2i i, int h, char l[5]);
+int		par_strdiff(char *a, char *b);
 
 /* ./par-fgetc.c */
 char	par_fgetc(int fd);

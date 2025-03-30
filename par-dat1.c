@@ -6,11 +6,10 @@
 /*   By: joleksia <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/21 07:48:04 by joleksia          #+#    #+#             */
-/*   Updated: 2025/03/28 07:01:49 by joleksia         ###   ########.fr       */
+/*   Updated: 2025/03/30 13:59:51 by joleksia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft/libft.h"
 #include "parser.h"
 
 int	par_dat_ext(const char *filepath)
@@ -67,6 +66,7 @@ int	par_dat_spawn_present(t_dat *dat)
 
 int	par_dat_check_spaces(t_dat *dat)
 {
+	char	neighs[5];
 	t_vec2i	i;
 
 	i[1] = -1;
@@ -77,14 +77,8 @@ int	par_dat_check_spaces(t_dat *dat)
 		{
 			if (dat->cell_data[i[1]][i[0]] == 32)
 			{
-				if ((i[0] > 0
-						&& ft_strchr("0NEWS", dat->cell_data[i[1]][i[0] - 1]))
-					|| (i[0] + 1 != 0
-						&& ft_strchr("0NEWS", dat->cell_data[i[1]][i[0] + 1]))
-					|| (i[1] > 0
-						&& ft_strchr("0NEWS", dat->cell_data[i[1] - 1][i[0]]))
-					|| (i[1] < (int) dat->height - 1
-						&& ft_strchr("0NEWS", dat->cell_data[i[1] + 1][i[0]])))
+				par_get_neigh(dat->cell_data, i, dat->height, neighs);
+				if (!par_strdiff("1 ", neighs))
 					return (!printf("error: hole in the map\n"));
 			}
 		}
