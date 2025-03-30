@@ -6,7 +6,7 @@
 /*   By: joleksia <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/21 07:22:12 by joleksia          #+#    #+#             */
-/*   Updated: 2025/03/30 06:38:08 by joleksia         ###   ########.fr       */
+/*   Updated: 2025/03/30 08:15:52 by joleksia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -131,5 +131,6 @@ void	*par_realloc(void *ptr, size_t size);
 char	*par_readfile(int fd);
 int		par_isspace(int c);
 int		par_max(int a, int b);
+char	**par_mapdup(char **src, size_t cnt);
 
 #endif /* PARSER_H */

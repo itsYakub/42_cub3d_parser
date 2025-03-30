@@ -6,7 +6,7 @@
 /*   By: joleksia <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/26 09:46:32 by joleksia          #+#    #+#             */
-/*   Updated: 2025/03/28 09:07:59 by joleksia         ###   ########.fr       */
+/*   Updated: 2025/03/30 08:15:58 by joleksia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,4 +65,16 @@ int	par_max(int a, int b)
 	if (a > b)
 		return (a);
 	return (b);
+}
+
+char	**par_mapdup(char **src, size_t cnt)
+{
+	char	**dst;
+
+	dst = (char **) malloc(cnt * sizeof(char *));
+	if (!dst)
+		return (0);
+	while (cnt--)
+		dst[cnt] = ft_strdup(src[cnt]);
+	return (dst);
 }
