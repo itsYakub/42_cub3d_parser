@@ -6,7 +6,7 @@
 /*   By: joleksia <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/21 07:34:01 by joleksia          #+#    #+#             */
-/*   Updated: 2025/03/28 08:57:29 by joleksia         ###   ########.fr       */
+/*   Updated: 2025/04/11 09:06:41 by joleksia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,12 +82,7 @@ static int	__par_process_dat(t_dat *dat)
 {
 	if (!par_dat_inv_char(dat))
 		return (0);
-	if (!par_left_bound(dat)
-		|| !par_right_bound(dat)
-		|| !par_top_bound(dat)
-		|| !par_down_bound(dat))
-		return (0);
-	if (!par_dat_check_spaces(dat))
+	if (!par_empty_char(dat))
 		return (0);
 	if (par_dat_spawn_present(dat) != 1)
 		return (0);

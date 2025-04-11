@@ -6,7 +6,7 @@
 /*   By: joleksia <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/30 13:58:23 by joleksia          #+#    #+#             */
-/*   Updated: 2025/03/30 13:59:08 by joleksia         ###   ########.fr       */
+/*   Updated: 2025/04/11 09:08:18 by joleksia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,9 +15,9 @@
 int	par_get_neigh(char **t, t_vec2i i, int h, char l[5])
 {
 	int	_i;
-	
+
 	ft_memset(l, 0, 5);
-	_i = -1;
+	_i = 0;
 	if (i[0] > 0)
 		l[_i++] = t[i[1]][i[0] - 1];
 	if (ft_strlen(t[i[1]]) > i[0] + 1)

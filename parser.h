@@ -6,7 +6,7 @@
 /*   By: joleksia <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/21 07:22:12 by joleksia          #+#    #+#             */
-/*   Updated: 2025/03/30 13:59:39 by joleksia         ###   ########.fr       */
+/*   Updated: 2025/04/11 09:09:05 by joleksia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,7 +99,6 @@ int		par_dat_unload(t_dat *dat);
 int		par_dat_ext(const char *filepath);
 int		par_dat_inv_char(t_dat *dat);
 int		par_dat_spawn_present(t_dat *dat);
-int		par_dat_check_spaces(t_dat *dat);
 int		par_get_neigh(char **t, t_vec2i i, int h, char l[5]);
 int		par_strdiff(char *a, char *b);
 
@@ -123,10 +122,7 @@ t_map	*par_map_init(const char *file);
 int		par_map_unload(t_map *map);
 
 /* ./par-dat-bounds0.c */
-int		par_left_bound(t_dat *dat);
-int		par_right_bound(t_dat *dat);
-int		par_top_bound(t_dat *dat);
-int		par_down_bound(t_dat *dat);
+int		par_empty_char(t_dat *dat);
 
 /* ./par-utils0.c */
 void	*par_realloc(void *ptr, size_t size);
